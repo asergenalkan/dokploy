@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { api } from "@/utils/api";
 
 const WL_CACHE_KEY = "whitelabeling-cache";
@@ -34,6 +34,7 @@ function setCached<T>(key: string, value: T | null) {
  */
 export function useWhitelabeling() {
 	const cached = useMemo(() => getCached<any>(WL_CACHE_KEY), []);
+	const [clientConfig, setClientConfig] = useState<any>(cached ?? null);
 	const { data, ...rest } = api.whitelabeling.get.useQuery(undefined, {
 		staleTime: 5 * 60 * 1000,
 		refetchOnWindowFocus: false,
@@ -41,10 +42,12 @@ export function useWhitelabeling() {
 	});
 
 	useEffect(() => {
-		setCached(WL_CACHE_KEY, data ?? null);
-	}, [data]);
+		const next = data ?? cached ?? null;
+		setClientConfig(next);
+		setCached(WL_CACHE_KEY, next);
+	}, [cached, data]);
 
-	return { config: data ?? null, ...rest };
+	return { config: clientConfig, ...rest };
 }
 
 /**
@@ -53,6 +56,7 @@ export function useWhitelabeling() {
  */
 export function useWhitelabelingPublic() {
 	const cached = useMemo(() => getCached<any>(WL_PUBLIC_CACHE_KEY), []);
+	const [clientConfig, setClientConfig] = useState<any>(cached ?? null);
 	const { data, ...rest } = api.whitelabeling.getPublic.useQuery(undefined, {
 		staleTime: 5 * 60 * 1000,
 		refetchOnWindowFocus: false,
@@ -60,8 +64,10 @@ export function useWhitelabelingPublic() {
 	});
 
 	useEffect(() => {
-		setCached(WL_PUBLIC_CACHE_KEY, data ?? null);
-	}, [data]);
+		const next = data ?? cached ?? null;
+		setClientConfig(next);
+		setCached(WL_PUBLIC_CACHE_KEY, next);
+	}, [cached, data]);
 
-	return { config: data ?? null, ...rest };
+	return { config: clientConfig, ...rest };
 }
