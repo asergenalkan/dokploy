@@ -11,6 +11,7 @@ import { SearchCommand } from "@/components/dashboard/search-command";
 import { WhitelabelingProvider } from "@/components/proprietary/whitelabeling/whitelabeling-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { api } from "@/utils/api";
+import { useWhitelabelingPublic } from "@/utils/hooks/use-whitelabeling";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ const MyApp = ({
 	pageProps: { ...pageProps },
 }: AppPropsWithLayout) => {
 	const getLayout = Component.getLayout ?? ((page) => page);
+	const { config: whitelabeling } = useWhitelabelingPublic();
 
 	return (
 		<>
@@ -39,7 +41,7 @@ const MyApp = ({
 				`}
 			</style>
 			<Head>
-				<title>Dokploy</title>
+				<title>{whitelabeling?.metaTitle || ""}</title>
 			</Head>
 			<ThemeProvider
 				attribute="class"

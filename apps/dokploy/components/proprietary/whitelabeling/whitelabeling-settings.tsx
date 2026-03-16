@@ -288,10 +288,10 @@ export function WhitelabelingSettings() {
 									<FormItem>
 										<FormLabel>Application Name</FormLabel>
 										<FormControl>
-											<Input placeholder="Dokploy" {...field} />
+											<Input placeholder="My Application" {...field} />
 										</FormControl>
 										<FormDescription>
-											Replaces "Dokploy" across the entire interface.
+											Application name shown across the entire interface.
 										</FormDescription>
 										<FormMessage />
 									</FormItem>
@@ -305,14 +305,13 @@ export function WhitelabelingSettings() {
 									<FormItem>
 										<FormLabel>Application Description</FormLabel>
 										<FormControl>
-											<Input
-												placeholder="The Open Source alternative to Netlify, Vercel, Heroku."
+											<Textarea
+												placeholder="Deploy applications effortlessly"
 												{...field}
 											/>
 										</FormControl>
 										<FormDescription>
-											Tagline shown on the login/onboarding pages. Defaults to
-											the standard Dokploy description if empty.
+											Tagline shown on the login/onboarding pages.
 										</FormDescription>
 										<FormMessage />
 									</FormItem>
@@ -449,10 +448,10 @@ export function WhitelabelingSettings() {
 									<FormItem>
 										<FormLabel>Page Title</FormLabel>
 										<FormControl>
-											<Input placeholder="Dokploy" {...field} />
+											<Input placeholder="My Application" {...field} />
 										</FormControl>
 										<FormDescription>
-											Browser tab title. Defaults to "Dokploy" if empty.
+											Browser tab title shown in the page title.
 										</FormDescription>
 										<FormMessage />
 									</FormItem>
